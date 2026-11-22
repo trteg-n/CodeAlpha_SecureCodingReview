@@ -1,0 +1,40 @@
+
+{% extends "base.html" %}
+
+{% block title %}EmployeeHub | Login{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+    <span class="tag">Account Access</span>
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Sign in to your EmployeeHub account.</p>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"
+               placeholder="Enter your username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               placeholder="Enter your password" required>
+
+        <button type="submit" class="btn full-width">Sign In</button>
+
+    </form>
+
+    <p class="form-footer">
+        Don't have an account?
+        <a href="{{ url_for('register') }}">Register here</a>
+    </p>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+
+{% extends "base.html" %}
+
+{% block title %}EmployeeHub | Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <span class="tag">Employee Dashboard</span>
+    <h1>Welcome, {{ session.get('username') }}</h1>
+    <p>Here is an overview of your employee portal.</p>
+
+</div>
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <p>Total Employees</p>
+        <h2>{{ employee_count }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <p>Departments</p>
+        <h2>{{ department_count }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <p>Account Role</p>
+        <h2>{{ session.get('role') | capitalize }}</h2>
+    </div>
+
+</div>
+
+<h2 class="section-heading">Quick Actions</h2>
+
+<div class="features">
+
+    <div class="card">
+        <h3>Employee Directory</h3>
+        <p>Search and view employee information.</p>
+        <a class="btn" href="{{ url_for('search') }}">
+            View Employees
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>My Profile</h3>
+        <p>View and update your account information.</p>
+        <a class="btn" href="{{ url_for('profile') }}">
+            Manage Profile
+        </a>
+    </div>
+
+    {% if session.get('role') == 'admin' %}
+        <div class="card">
+            <h3>Administration</h3>
+            <p>View registered user accounts.</p>
+            <a class="btn" href="{{ url_for('admin') }}">
+                Admin Panel
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

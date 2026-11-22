@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+{% block title %}EmployeeHub | Profile{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+    <span class="tag">Account Settings</span>
+    <h2>My Profile</h2>
+    <p class="subtitle">View and update your account details.</p>
+
+{% if error %}
+    <div class="error-message" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+
+        <label>Account ID</label>
+        <input type="text" value="{{ user['id'] }}" disabled>
+
+        <label>Username</label>
+        <input type="text" value="{{ user['username'] }}" disabled>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email"
+               value="{{ user['email'] }}" required>
+
+        <label>Account Role</label>
+        <input type="text"
+               value="{{ user['role'] | capitalize }}" disabled>
+
+        <button type="submit" class="btn full-width">
+            Save Changes
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

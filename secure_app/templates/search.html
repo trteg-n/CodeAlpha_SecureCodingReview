@@ -1,0 +1,71 @@
+
+{% extends "base.html" %}
+
+{% block title %}EmployeeHub | Employees{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <span class="tag">Employee Directory</span>
+    <h1>Find Employees</h1>
+    <p>Search employees by name or department.</p>
+</div>
+{% if error %}
+    <div class="error-message" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+<div class="card">
+    <form method="GET" class="search-form">
+
+        <input type="text" name="q"
+               aria-label="Search employees"
+               placeholder="Search by name or department..."
+               value="{{ query }}">
+
+        <button type="submit" class="btn">Search</button>
+
+        <a class="btn btn-outline" href="{{ url_for('search') }}">
+            Clear
+        </a>
+
+    </form>
+</div>
+
+<div class="table-card">
+
+    <h3>Employee Records ({{ employees | length }})</h3>
+
+    {% if employees %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee['id'] }}</td>
+                        <td>{{ employee['name'] }}</td>
+                        <td>{{ employee['department'] }}</td>
+                        <td>{{ employee['email'] }}</td>
+                        <td>{{ employee['position'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>No employees found.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

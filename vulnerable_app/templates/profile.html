@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+
+{% block title %}EmployeeHub | Profile{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+    <span class="tag">Account Settings</span>
+    <h2>My Profile</h2>
+    <p class="subtitle">View and update your account details.</p>
+
+    <form method="POST">
+
+        <label>Account ID</label>
+        <input type="text" value="{{ user['id'] }}" disabled>
+
+        <label>Username</label>
+        <input type="text" value="{{ user['username'] }}" disabled>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email"
+               value="{{ user['email'] }}" required>
+
+        <label>Account Role</label>
+        <input type="text"
+               value="{{ user['role'] | capitalize }}" disabled>
+
+        <button type="submit" class="btn full-width">
+            Save Changes
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
